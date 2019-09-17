@@ -79,8 +79,7 @@ class MainActivity : AppCompatActivity() {
 
         if(requestCode == newTodoActivityRequestCode && resultCode == Activity.RESULT_OK){
             data?.let {
-                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-                val toDo = ToDo(it.getStringExtra(NewToDo.EXTRA_TITLE), it.getStringExtra(NewToDo.EXTRA_DESCRIPTION), it.getStringExtra(NewToDo.EXTRA_DUEDATE), it.getStringExtra(NewToDo.EXTRA_TODAY))
+                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS") val toDo = ToDo(it.getStringExtra(NewToDo.EXTRA_TITLE), it.getStringExtra(NewToDo.EXTRA_DESCRIPTION), it.getStringExtra(NewToDo.EXTRA_DUEDATE), it.getStringExtra(NewToDo.EXTRA_TODAY))
                 toDoViewModel.insert(toDo)
             }
         }

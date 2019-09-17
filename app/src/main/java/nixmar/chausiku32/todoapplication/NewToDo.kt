@@ -16,7 +16,7 @@ class NewToDo : AppCompatActivity() {
     private lateinit var description: EditText
     private lateinit var dueDate: EditText
     private lateinit var today: EditText
-    private lateinit var date: CalendarView
+/*    private lateinit var date: CalendarView*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class NewToDo : AppCompatActivity() {
         description = findViewById(R.id.edtTextDescription)
         dueDate = findViewById(R.id.edtTextDueDate)
         today = findViewById(R.id.edtTextToday)
-        date = findViewById(R.id.calendarToDoView)
+/*        date = findViewById(R.id.calendarToDoView)*/
 
 /*
         dueDate.setOnClickListener {
