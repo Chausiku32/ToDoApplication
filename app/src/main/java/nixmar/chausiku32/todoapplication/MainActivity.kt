@@ -18,37 +18,36 @@ import nixmar.chausiku32.todoapplication.adapters.ToDoListAdapter
 import nixmar.chausiku32.todoapplication.models.ToDo
 import nixmar.chausiku32.todoapplication.viewModels.ToDoViewModel
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var toDoViewModel: ToDoViewModel
-
+    var toDoList = ArrayList<ToDo>()
+    val adapter = ToDoAdapter()
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerTodoListView)
-        val adapter = ToDoListAdapter(this)
-        recyclerView.adapter = adapter
-        //val toDo = ArrayList<ToDo>()
-/*        val todo = listOf<ToDo>(ToDo("Today", "Is", "17/09/2019", "17/09/2019"))*/
-        /*val adapter = ToDoAdapter()*/
+  /*      val adapter = ToDoListAdapter(this)
+        recyclerView.adapter = adapter*/
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-/*        var intent: Intent
-
+/*        var intent = Intent()
         var title: String = intent.getStringExtra(NewToDo.EXTRA_TITLE)
         var description: String = intent.getStringExtra(NewToDo.EXTRA_DESCRIPTION)
         var dueDate: String = intent.getStringExtra(NewToDo.EXTRA_DUEDATE)
         var toDay: String = intent.getStringExtra(NewToDo.EXTRA_TODAY)
 
         var todo = ToDo(title, description, dueDate,toDay )
-        var todoList = listOf(todo)
-        adapter.submitList(todoList)*/
+        toDoList.add(todo)
+        adapter.submitList(toDoList)*/
 
         toDoViewModel = ViewModelProviders.of(this).get(ToDoViewModel::class.java)
-        toDoViewModel.allToDos.observe(this, Observer { toDos ->
+        toDoViewModel.allToDos.observe(this, Observer { toDos ->    ///.observe(viewLifeCycleOwner, )
             toDos?.let { adapter.setToDos(it) }
         })
 
@@ -79,7 +78,15 @@ class MainActivity : AppCompatActivity() {
 
         if(requestCode == newTodoActivityRequestCode && resultCode == Activity.RESULT_OK){
             data?.let {
-                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS") val toDo = ToDo(it.getStringExtra(NewToDo.EXTRA_TITLE), it.getStringExtra(NewToDo.EXTRA_DESCRIPTION), it.getStringExtra(NewToDo.EXTRA_DUEDATE), it.getStringExtra(NewToDo.EXTRA_TODAY))
+
+                var title: String = data.getStringExtra(NewToDo.EXTRA_TITLE)
+                var description: String = data.getStringExtra(NewToDo.EXTRA_DESCRIPTION)
+                var dueDate: String = data.getStringExtra(NewToDo.EXTRA_DUEDATE)
+                var toDay: String = data.getStringExtra(NewToDo.EXTRA_TODAY)
+
+                @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS") var toDo = ToDo(title, description, dueDate, toDay)
+                toDoList.add(toDo)
+                adapter.submitList(toDoList)
                 toDoViewModel.insert(toDo)
             }
         }

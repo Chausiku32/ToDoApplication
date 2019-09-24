@@ -14,6 +14,11 @@ interface ToDoDAO {
 
     @Query("DELETE FROM toDo_table")
     suspend fun deleteAll()
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(toDo: ToDo)
+
+
 }
 
 /*  @Delete()
@@ -23,4 +28,8 @@ interface ToDoDAO {
     suspend fun update(toDo: ToDo){}
 
     @Query()
-    suspend fun getTodoById()*/
+    suspend fun getTodoById()
+
+        @Query("SELECT * FROM toDo_table WHERE title == %s", id)
+    suspend fun getTodoById(String id)
+    */

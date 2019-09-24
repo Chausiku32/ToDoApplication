@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class ToDo(@PrimaryKey @ColumnInfo(name = "title") val title : String,
                 val description : String,
                 var dueDate : String,
-                var toDay : String){}
+                var toDay : String)
 /*
 * (name = "id") var id : Int,
 * */

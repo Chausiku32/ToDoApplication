@@ -16,7 +16,6 @@ class NewToDo : AppCompatActivity() {
     private lateinit var description: EditText
     private lateinit var dueDate: EditText
     private lateinit var today: EditText
-/*    private lateinit var date: CalendarView*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,31 +25,19 @@ class NewToDo : AppCompatActivity() {
         description = findViewById(R.id.edtTextDescription)
         dueDate = findViewById(R.id.edtTextDueDate)
         today = findViewById(R.id.edtTextToday)
-/*        date = findViewById(R.id.calendarToDoView)*/
-
-/*
-        dueDate.setOnClickListener {
-            date.isClickable = true
-            val todayDate: String = date.toString()
-            date.isClickable = false
-            dueDate.setText(todayDate)
-        }
-*/
-
 
         val btnOk = findViewById<Button>(R.id.btnSubmit)
         btnOk.setOnClickListener{
             val submitIntent = Intent()
             if(TextUtils.isEmpty(title.text) || TextUtils.isEmpty(description.text) || TextUtils.isEmpty(dueDate.text) || TextUtils.isEmpty(today.text)){
                 setResult(Activity.RESULT_CANCELED, submitIntent)
-                Toast.makeText(this, "Cannot submit empty value(s)", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Cannot submit an empty value(s)", Toast.LENGTH_SHORT).show()
             }
             else {
                 val toDoTitle = title.text.toString()
                 val toDoDescription = description.text.toString()
                 val toDoDueDate = dueDate.text.toString()
                 val toDoToday = today.text.toString()
-/*                val todoDate = date.toString()*/
 
                 submitIntent.putExtra(EXTRA_TITLE, toDoTitle)
                 submitIntent.putExtra(EXTRA_DESCRIPTION, toDoDescription)
